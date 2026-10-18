@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from .interno import proteger_servicio
 
 from .routers import declaraciones
 from .events import iniciar_consumidor
@@ -14,6 +15,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Customs Service", lifespan=lifespan)
 app.include_router(declaraciones.router)
+proteger_servicio(app)
 
 
 @app.get("/health")
