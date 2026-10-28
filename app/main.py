@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from .interno import proteger_servicio
@@ -20,4 +21,4 @@ proteger_servicio(app)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "service": "customs-service"}
+    return {"status": "ok", "service": "customs-service", "version": os.getenv("APP_VERSION", "dev")}
