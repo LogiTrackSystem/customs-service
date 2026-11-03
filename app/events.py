@@ -55,8 +55,8 @@ async def _procesar_shipment_created(payload: dict):
         return
 
     envio_id = uuid.UUID(payload["envio_id"])
-    pais_origen = payload["origen"]
-    pais_destino = payload["destino"]
+    pais_origen = payload.get("pais_origen") or payload["origen"]
+    pais_destino = payload.get("pais_destino") or payload["destino"]
 
     db: Session = SessionLocal()
     try:
